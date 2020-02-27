@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Child from './Child'
 import {Button} from 'antd'
-// import 'antd/dist/antd.min.css'
 
 export default class Life extends Component {
   constructor(props) {

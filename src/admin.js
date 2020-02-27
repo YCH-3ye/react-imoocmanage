@@ -3,6 +3,7 @@ import { Row, Col  } from 'antd'
 import Header from './components/Header/'
 import Footer from './components/Footer/'
 import NavLeft from './components/NavLeft/'
+import Home from './pages/home/home'
 import './style/common.less'
 
 export default class Admin extends Component {
@@ -14,7 +15,9 @@ export default class Admin extends Component {
       </Col>
       <Col className="mian" span={21}>
         <Header className="header"></Header>
-        { this.props.children }
+        <Row className="content">
+          {this.props.children}
+        </Row>
         <Footer className="footer"></Footer>
       </Col>
     </Row>

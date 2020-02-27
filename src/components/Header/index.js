@@ -1,10 +1,60 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-
+import { Col, Row }  from 'antd'
+import Utils from '../../utils/utils'
+import axios from '../../axios/axios'
+import './index.less'
 export default class Header extends Component {
+  componentDidMount() {
+    this.getCurrentWeather()
+    setInterval(() => {
+      let currentTime = Utils.formateDate(new Date().getTime())
+      this.setState({
+        currentTime
+      })
+    }, 1000);
+  }
+  getCurrentWeather() {
+    let city = '上海'
+    axios.jsonp({
+      url:'http://api.map.baidu.com/telematics/v3/weather?location='+encodeURIComponent(city)+'&output=json&ak=3p49MVra6urFRGOT9s8UBWr2'
+    }).then((res)=> {
+      console.log(res)
+      const {weather_data} = res.results[0]
+      const weather = weather_data[0].weather
+      const weather_imgSrc = weather_data[0].dayPictureUrl
+      this.setState({
+        weather,
+        weather_imgSrc
+      })
+    })
+  }
+  //
+  state = {
+    loginName: '叶夜葉',
+    currentTime: '',
+    weather: '',
+    weather_imgSrc: ''
+  }
   render() {
     return (
-      <div>Header</div>
+      <div className="header">
+        <Row className="header-top">
+          <Col span={24}>
+            <span>欢迎， {this.state.loginName}</span>
+            <a href="#" className="loginout">退出</a>
+          </Col>
+        </Row>
+        <Row className="breadcrumb">
+          <Col span={4} className="header-title">
+            首页
+          </Col>
+          <Col span={20} className="weather">
+            <span className="date">{this.state.currentTime}</span>
+            <img className="weather-img" src={this.state.weather_imgSrc} alt=""/>
+            <span className="weather-detail">{this.state.weather}</span>
+          </Col>
+        </Row>
+      </div>
     )
   }
 }

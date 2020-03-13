@@ -9,7 +9,10 @@ import Moadlings from './pages/ui/moadlings/moadlings'
 import Loadings from './pages/ui/loadings/loadings'
 import Notic from './pages/ui/notic/notic'
 import Messages from './pages/ui/messages/messages'
+import Tabs from './pages/ui/tabs/tabs'
+import Gallery from './pages/ui/gallery/gallery'
 import Nomatch from './pages/nomatch/nomatch'
+
 
 
 
@@ -20,7 +23,7 @@ export default class Router extends Component {
         <App>
           <Switch>
             <Route path="/login" component={Login}></Route>
-            <Route path="/" render={() =>
+            <Route  path="/" render={() =>
               <Admin>
                 <Switch>
                   <Route path="/admin/home" component={Home}></Route>
@@ -29,9 +32,11 @@ export default class Router extends Component {
                   <Route path="/admin/ui/loadings" component={Loadings}/>
                   <Route path="/admin/ui/notification" component={Notic}/>
                   <Route path="/admin/ui/messages" component={Messages}/>
-                  {/* <Route path="/admin/ui/loadings" component={loadings}/> */}
-                  <Redirect excat path="/login" to="/home"/>
-                  <Route  component={Nomatch}></Route>
+                  <Route path="/admin/ui/tabs" component={Tabs}/>
+                  <Route path="/admin/ui/gallery" component={Gallery}/>
+                  <Route path="/admin/form/login" component={Login}/>
+                  <Route excat component={Nomatch}></Route>
+                  <Redirect excat path="/" to="/admin/home"/>
                 </Switch>
               </Admin>
             }/>
